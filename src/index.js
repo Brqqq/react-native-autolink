@@ -143,13 +143,14 @@ export default class Autolink extends PureComponent {
       }
       case 'phone': {
         const number = match.getNumber();
+        const optionalPlusSign = (Platform.OS === "android" && match.plusSign) ? "+" : "";
 
         switch (phone) {
           case 'sms':
           case 'text':
             return [`sms:${number}`];
           default:
-            return [`tel:${number}`];
+            return [`tel:${optionalPlusSign}${number}`];
         }
       }
       case 'url': {
